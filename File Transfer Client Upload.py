@@ -23,7 +23,7 @@ def open_file():
     send_butt.config(state=NORMAL)
 def send_file():
     s = socket.socket()
-    host = '192.168.0.66'
+    host = 'IP Address Here'
     port = 9001
     s.connect((host, port))
     s.send(b'to Send File')
