@@ -2,12 +2,14 @@ import socket
 import pickle
 from threading import Thread
 from os import fsync
+
 try:
     from Tkinter import *
     from tkMessageBox import *
     from tkFileDialog import *
 except:
     from tkinter import *
+
 def dl(sock):
     global current_file_sel,master
     fn_parts = current_file_sel.get().split('.')
@@ -31,6 +33,7 @@ def dl(sock):
             return None
     t = Thread(target= lambda:run(sock))
     t.start()
+    
 def m(window,file_names,s):
     global master
     master = window
@@ -51,6 +54,7 @@ def setup(window,file_names):
     current_file_sel = StringVar()
     del file_names[0]
     m(window,file_names,s)
+    
 if __name__ == '__main__':
     global current_file_sel
     init = socket.socket()
