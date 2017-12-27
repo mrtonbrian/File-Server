@@ -5,9 +5,11 @@ from SocketServer import ThreadingMixIn
 from os import listdir,fsync
 import pickle
 p = 9001
+
 def get_ip():
     import netifaces as ni
     return str(ni.ifaddresses('eth0')[ni.AF_INET][0]['addr'])
+
 ip = get_ip()
 print ip
 listen_sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
