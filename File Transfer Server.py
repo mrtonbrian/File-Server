@@ -7,8 +7,16 @@ import pickle
 p = 9001
 
 def get_ip():
-    import netifaces as ni
-    return str(ni.ifaddresses('eth0')[ni.AF_INET][0]['addr'])
+    if sys.platform != 'win64' and sys.platform != 'win32':
+        interfaces = netifaces.interfaces()
+        if 'eth0' in interfaces:
+            return netifaces.ifaddresses('eth0')[netifaces.AF_INET][0]['addr']
+        elif 'wlan0' in interfaces:
+            return netifaces.ifaddresses('wlan0')[netifaces.AF_INET][0]['addr']
+        else:
+            return netifaces.ifaddresses(interfaces[0])[netifaces.AF_INET][0]['addr']
+    else:
+        return socket.gethostbyname(socket.getfqdn())
 
 ip = get_ip()
 print ip
